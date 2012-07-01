@@ -72,6 +72,6 @@ void QOpenCVWidget::timerEvent(QTimerEvent *)
 }
 void QOpenCVWidget::saveImage()
 {
-    QString path = QFileDialog::getSaveFileName(this->parent, "save file dialog", ".", "Images (*.png *.xpm *.jpg)");
-    image.save(path);
+    QString path = QFileDialog::getSaveFileName(this->parent, "save file dialog", ".", "*.png");
+    if (path != NULL) image.save(path);
 }

@@ -16,9 +16,9 @@ PKGCONFIG += opencv
 
 SOURCES += main.cpp\
         login_widget.cpp \
-    QOpenCVWidget.cpp
+    QOpenCVWidget.cpp \
+    config_dialog.cpp
 
 HEADERS  += login_widget.h \
-    QOpenCVWidget.h
-
-FORMS    += loginwidget.ui
+    QOpenCVWidget.h \
+    config_dialog.h
