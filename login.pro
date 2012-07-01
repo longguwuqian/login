@@ -11,10 +11,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = login
 TEMPLATE = app
 
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv
 
 SOURCES += main.cpp\
-        login_widget.cpp
+        login_widget.cpp \
+    QOpenCVWidget.cpp
 
-HEADERS  += login_widget.h
+HEADERS  += login_widget.h \
+    QOpenCVWidget.h
 
 FORMS    += loginwidget.ui
