@@ -15,6 +15,7 @@ public:
 private:
     QPushButton *btn_regnow;
     QPushButton *btn_cancel;
+    opencv_widget *wgt_cv_login;
     opencv_widget *wgt_cv;
 signals:
     

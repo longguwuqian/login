@@ -44,12 +44,12 @@ private:
     QCheckBox *cb_use_password;
     opencv_widget *wgt_cv;
     QWidget *wgt_right;
+    register_widget *wgt_reg;
     config_dialog *dlg_config;
-    register_widget *wgt_register;
 
 private slots:
-    void call_config_dialog();
     void call_register_widget();
+    void call_config_dialog();
 };
 
 #endif // LOGIN_WIDGET_H

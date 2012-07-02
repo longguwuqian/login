@@ -8,18 +8,18 @@ opencv_widget::opencv_widget(QWidget *parent, int timer_interval, int max_width,
     camera = cvCreateCameraCapture(0);
     assert(camera);
     layout = new QVBoxLayout;
-    imagelabel = new QLabel(this);
+    lb_img = new QLabel(this);
     QImage dummy(100, 100, QImage::Format_RGB32);
-    image = dummy;
-    layout->addWidget(imagelabel);
+    img = dummy;
+    layout->addWidget(lb_img);
     for (int x = 0; x < 100; x ++) {
         for (int y =0; y < 100; y++) {
-            image.setPixel(x, y, qRgb(x, y, y));
+            img.setPixel(x, y, qRgb(x, y, y));
         }
     }
     this->setMaximumSize(max_width, max_height);
     this->setMinimumSize(min_width, min_height);
-    imagelabel->setPixmap(QPixmap::fromImage(image));
+    lb_img->setPixmap(QPixmap::fromImage(img));
     this->setLayout(layout);
     this->is_enabled = true;
     this->timer_id = startTimer(timer_interval);
@@ -48,8 +48,8 @@ void opencv_widget::cvimage2qimage(const IplImage *cvimage, QImage &qimage)
 void opencv_widget::put_image(IplImage *cvimage)
 {
    // QImage qimage;
-    this->cvimage2qimage(cvimage, image);
-    imagelabel->setPixmap(QPixmap::fromImage(image.scaled(imagelabel->width(), imagelabel->height())));
+    this->cvimage2qimage(cvimage, img);
+    lb_img->setPixmap(QPixmap::fromImage(img.scaled(lb_img->width(), lb_img->height())));
 }
 void opencv_widget::timerEvent(QTimerEvent *)
 {
@@ -59,7 +59,7 @@ void opencv_widget::timerEvent(QTimerEvent *)
 void opencv_widget::save_image()
 {
     QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), "save file dialog", ".", "*.png");
-    if (path != NULL) image.save(path);
+    if (path != NULL) img.save(path);
 }
 void opencv_widget::set_enable(bool b)
 {

@@ -15,9 +15,9 @@ class opencv_widget : public QWidget {
     Q_OBJECT
 
     private:
-        QLabel *imagelabel;
+        QLabel *lb_img;
         QVBoxLayout *layout;
-        QImage image;
+        QImage img;
         CvCapture *camera;
         bool is_enabled;
         int timer_id;
@@ -27,8 +27,8 @@ class opencv_widget : public QWidget {
         ~opencv_widget(void);
         void put_image(IplImage *);
         void cvimage2qimage(const IplImage* cvimage, QImage &qimage);
-        void set_enable(bool b);
-        void set_disable(bool b);
+        void set_enable(bool b = true);
+        void set_disable(bool b = true);
     public slots:
         void save_image();
     protected:
