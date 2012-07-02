@@ -15,6 +15,7 @@
 #include <highgui.h>
 #include "QOpenCVWidget.h"
 #include "config_dialog.h"
+#include "register_widget.h"
 
 class login_widget : public QWidget
 {
@@ -35,18 +36,20 @@ private:
     QPushButton *btn_login;
     QPushButton *btn_config;
     QPushButton *btn_quit;
+    QPushButton *btn_register;
     QLineEdit *le_username;
     QLineEdit *le_password;
     QLabel *lb_username;
     QLabel *lb_password;
     QCheckBox *cb_use_password;
-    bool *use_password;
-    QOpenCVWidget *cvwidget;
-    QWidget *right_widget;
+    QOpenCVWidget *wgt_cv;
+    QWidget *wgt_right;
     config_dialog *dlg_config;
+    register_widget *wgt_register;
 
 private slots:
-    void on_btn_config_clicked();
+    void call_config_dialog();
+    void call_register_widget();
 };
 
 #endif // LOGIN_WIDGET_H
