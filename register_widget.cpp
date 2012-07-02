@@ -1,4 +1,5 @@
 #include "register_widget.h"
+#include <QtGui>
 #include <QGridLayout>
 
 register_widget::register_widget(QWidget *parent, Qt::WindowFlags f) :

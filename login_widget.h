@@ -1,19 +1,19 @@
 #ifndef LOGIN_WIDGET_H
 #define LOGIN_WIDGET_H
 
-#include <QWidget>
-#include <QMessageBox>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QCheckBox>
-#include <QDialog>
-#include <QToolBox>
+class QWidget;
+class QMessageBox;
+class QHBoxLayout;
+class QVBoxLayout;
+class QLabel;
+class QPushButton;
+class QLineEdit;
+class QCheckBox;
+class QDialog;
+
 #include <cv.h>
 #include <highgui.h>
-#include "QOpenCVWidget.h"
+#include "opencv_widget.h"
 #include "config_dialog.h"
 #include "register_widget.h"
 
@@ -42,7 +42,7 @@ private:
     QLabel *lb_username;
     QLabel *lb_password;
     QCheckBox *cb_use_password;
-    QOpenCVWidget *wgt_cv;
+    opencv_widget *wgt_cv;
     QWidget *wgt_right;
     config_dialog *dlg_config;
     register_widget *wgt_register;

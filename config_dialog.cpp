@@ -1,5 +1,5 @@
 #include "config_dialog.h"
-#include <QGridLayout>
+#include <QtGui>
 
 config_dialog::config_dialog(QWidget *parent) :
     QDialog(parent)

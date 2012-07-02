@@ -2,7 +2,8 @@
 #define SETTINGS_DIALOG_H
 
 #include <QDialog>
-#include <QPushButton>
+class QWidget;
+class QPushButton;
 
 class config_dialog : public QDialog
 {

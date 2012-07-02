@@ -1,5 +1,5 @@
+#include <QtGui>
 #include "login_widget.h"
-#include "ui_loginwidget.h"
 
 login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
@@ -10,7 +10,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
-    wgt_cv = new QOpenCVWidget(this, 50, 500, 600, 500, 600);
+    wgt_cv = new opencv_widget(this, 50, 500, 600, 500, 600);
     wgt_right = new QWidget(this);
     wgt_right->setMaximumHeight(300);
     wgt_right->setMinimumHeight(300);
@@ -44,17 +44,20 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     /////
     tmp_btn_save_img = new QPushButton("save img", wgt_right);
-    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_cv, SLOT(saveImage()));
     vlayout->addWidget(tmp_btn_save_img);
     /////
 
+    wgt_right->setLayout(vlayout);
+    this->setLayout(hlayout);
+
+    /////
+    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_cv, SLOT(saveImage()));
+    /////
     connect(cb_use_password, SIGNAL(clicked(bool)), le_password, SLOT(setEnabled(bool)));
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
     connect(btn_config, SIGNAL(clicked()), this, SLOT(call_config_dialog()));
     connect(btn_quit, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_register, SIGNAL(clicked()), this,SLOT(call_register_widget()));
-    wgt_right->setLayout(vlayout);
-    this->setLayout(hlayout);
 }
 
 login_widget::~login_widget()

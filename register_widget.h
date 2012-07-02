@@ -2,7 +2,8 @@
 #define REGISTER_WIDGET_H
 
 #include <QWidget>
-#include <QPushButton>
+
+class QPushButton;
 
 class register_widget : public QWidget
 {

@@ -11,16 +11,30 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = login
 TEMPLATE = app
 
-CONFIG += link_pkgconfig
-PKGCONFIG += opencv
+unix{
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv
+}
+
+win32{
+    INCLUDEPATH += "C:/opencv/opencv/build/include/opencv" \
+                   "C:/opencv/opencv/build/include"
+
+    LIBS += "C:/opencv/lib/libopencv_core241.dll.a" \
+            "C:/opencv/lib/libopencv_features2d241.dll.a" \
+            "C:/opencv/lib/libopencv_flann241.dll.a" \
+            "C:/opencv/lib/libopencv_highgui241.dll.a" \
+            "C:/opencv/lib/libopencv_video241.dll.a" \
+            "C:/opencv/lib/libopencv_imgproc241.dll.a"
+}
 
 SOURCES += main.cpp\
         login_widget.cpp \
-    QOpenCVWidget.cpp \
     config_dialog.cpp \
-    register_widget.cpp
+    register_widget.cpp \
+    opencv_widget.cpp
 
 HEADERS  += login_widget.h \
-    QOpenCVWidget.h \
     config_dialog.h \
-    register_widget.h
+    register_widget.h \
+    opencv_widget.h
