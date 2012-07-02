@@ -51,7 +51,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     this->setLayout(hlayout);
 
     /////
-    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_cv, SLOT(saveImage()));
+    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_cv, SLOT(save_image()));
     /////
     connect(cb_use_password, SIGNAL(clicked(bool)), le_password, SLOT(setEnabled(bool)));
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
@@ -72,7 +72,7 @@ void login_widget::call_config_dialog()
 }
 void login_widget::call_register_widget()
 {
-    this->wgt_register = new register_widget();
+    this->wgt_register = new register_widget(this->wgt_cv);
     this->wgt_register->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
     this->wgt_register->show();
 }

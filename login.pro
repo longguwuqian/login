@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     register_widget.cpp \
     opencv_widget.cpp
 
-HEADERS  += login_widget.h \
+HEADERS  += \
     config_dialog.h \
     register_widget.h \
-    opencv_widget.h
+    opencv_widget.h \
+    login_widget.h

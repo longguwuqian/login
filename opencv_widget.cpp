@@ -20,8 +20,10 @@ opencv_widget::opencv_widget(QWidget *parent, int timer_interval, int max_width,
     this->setMaximumSize(max_width, max_height);
     this->setMinimumSize(min_width, min_height);
     imagelabel->setPixmap(QPixmap::fromImage(image));
-    setLayout(layout);
-    startTimer(timer_interval);
+    this->setLayout(layout);
+    this->is_enabled = true;
+    this->timer_id = startTimer(timer_interval);
+    this->timer_interval = timer_interval;
 }
 
 opencv_widget::~opencv_widget(void)
@@ -58,4 +60,28 @@ void opencv_widget::save_image()
 {
     QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), "save file dialog", ".", "*.png");
     if (path != NULL) image.save(path);
+}
+void opencv_widget::set_enable(bool b)
+{
+    if (b) {
+        if (!is_enabled) {
+            this->timer_id = startTimer(this->timer_interval);
+            this->is_enabled = true;
+        }
+    } else {
+        killTimer(this->timer_id);
+        this->is_enabled = false;
+    }
+}
+void opencv_widget::set_disable(bool b)
+{
+    if (!b) {
+        if (!is_enabled) {
+            this->timer_id = startTimer(this->timer_interval);
+            this->is_enabled = true;
+        }
+    } else {
+        killTimer(this->timer_id);
+        this->is_enabled = false;
+    }
 }

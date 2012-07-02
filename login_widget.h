@@ -20,7 +20,7 @@ class QDialog;
 class login_widget : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     login_widget(QWidget *parent = 0, Qt::WindowFlags f = Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
     ~login_widget();
