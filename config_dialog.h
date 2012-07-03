@@ -2,6 +2,8 @@
 #define SETTINGS_DIALOG_H
 
 #include <QDialog>
+#include "config_manager.h"
+
 class QWidget;
 class QPushButton;
 class QRadioButton;
@@ -28,7 +30,9 @@ private:
 
     QGroupBox *gbx_browser;
 
-    QString browser_path;
+
+
+    config_manager *cfg_manager;
 
 signals:
     

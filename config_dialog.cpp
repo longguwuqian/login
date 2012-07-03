@@ -37,6 +37,7 @@ config_dialog::config_dialog(QWidget *parent) :
     this->le_browser_path->setEnabled(false);
     this->le_browser_path->setReadOnly(true);
     this->btn_choose_browser->setEnabled(false);
+    this->use_default_browser = true;
 
     connect(btn_cancel, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_save, SIGNAL(clicked()), this, SLOT(close()));
