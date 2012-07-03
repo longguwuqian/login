@@ -10,7 +10,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
-    wgt_cv = new opencv_widget(this, 50, 500, 600, 500, 600);
+    wgt_cv = new opencv_widget(this, 20, 500, 600, 500, 600);
     wgt_right = new QWidget(this);
     btn_login = new QPushButton(tr("LOGIN"), wgt_right);
     btn_config = new QPushButton(tr("config"), wgt_right);

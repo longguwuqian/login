@@ -21,7 +21,7 @@ opencv_widget::opencv_widget(QWidget *parent, int timer_interval, int max_width,
     this->setMinimumSize(min_width, min_height);
     lb_img->setPixmap(QPixmap::fromImage(img));
     this->setLayout(layout);
-    this->is_enabled = true;
+    this->_is_enabled = true;
     this->timer_id = startTimer(timer_interval);
     this->timer_interval = timer_interval;
 }
@@ -58,30 +58,52 @@ void opencv_widget::timerEvent(QTimerEvent *)
 }
 void opencv_widget::save_image()
 {
-    QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), "save file dialog", ".", "*.png");
+    QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), tr("save file dialog"), ".", tr("*.png"));
     if (path != NULL) img.save(path);
 }
 void opencv_widget::set_enable(bool b)
 {
     if (b) {
-        if (!is_enabled) {
+        if (!_is_enabled) {
+            if (camera == NULL) camera = cvCreateCameraCapture(0);
+            assert(camera);
             this->timer_id = startTimer(this->timer_interval);
-            this->is_enabled = true;
+            this->_is_enabled = true;
         }
     } else {
         killTimer(this->timer_id);
-        this->is_enabled = false;
+        if (camera != NULL) {
+            cvReleaseCapture(&camera);
+            camera = NULL;
+        }
+        this->_is_enabled = false;
     }
 }
 void opencv_widget::set_disable(bool b)
 {
     if (!b) {
-        if (!is_enabled) {
+        if (!_is_enabled) {
+            if (camera == NULL) camera = cvCreateCameraCapture(0);
+            assert(camera);
             this->timer_id = startTimer(this->timer_interval);
-            this->is_enabled = true;
+            this->_is_enabled = true;
         }
     } else {
         killTimer(this->timer_id);
-        this->is_enabled = false;
+        if (camera != NULL) {
+            cvReleaseCapture(&camera);
+            camera = NULL;
+        }
+        this->_is_enabled = false;
     }
+}
+
+bool opencv_widget::is_enabled()
+{
+    return this->_is_enabled;
+}
+
+bool opencv_widget::is_disabled()
+{
+    return !this->_is_enabled;
 }

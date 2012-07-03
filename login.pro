@@ -32,14 +32,12 @@ SOURCES += main.cpp\
         login_widget.cpp \
     config_dialog.cpp \
     register_widget.cpp \
-    opencv_widget.cpp \
-    browser_config.cpp
+    opencv_widget.cpp
 
 HEADERS  += \
     config_dialog.h \
     register_widget.h \
     opencv_widget.h \
-    login_widget.h \
-    browser_config.h
+    login_widget.h
 
 TRANSLATIONS += ./translations/i18n_zh_CN.ts

@@ -18,9 +18,6 @@ private:
     opencv_widget *wgt_cv_login;
     opencv_widget *wgt_cv;
 signals:
-    
-public slots:
-    
 };
 
 #endif // REGISTER_WIDGET_H

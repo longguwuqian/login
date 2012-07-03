@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTranslator>
+#include <QDesktopServices>
+#include <QUrl>
 #include "login_widget.h"
 
 int main(int argc, char *argv[])
@@ -10,6 +12,8 @@ int main(int argc, char *argv[])
     QTranslator *translator = new QTranslator(0);
     if (translator->load("i18n_zh_CN.qm", "./translations") == false) printf("aaaa");
     a.installTranslator(translator);
+
+//QDesktopServices::openUrl(QUrl("http://www.qtcn.org"));
 
     login_widget w;
     /*居中放置*/
