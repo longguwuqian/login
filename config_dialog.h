@@ -19,6 +19,7 @@ public:
     ~config_dialog();
     void closeEvent(QCloseEvent *e);
 private:
+
     QPushButton *btn_save;
     QPushButton *btn_cancel;
     QPushButton *btn_choose_browser;
@@ -29,10 +30,6 @@ private:
     QLineEdit *le_browser_path;
 
     QGroupBox *gbx_browser;
-
-
-
-    config_manager *cfg_manager;
 
 signals:
     

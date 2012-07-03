@@ -10,6 +10,7 @@ class QPushButton;
 class QLineEdit;
 class QCheckBox;
 class QDialog;
+class QString;
 
 #include <cv.h>
 #include <highgui.h>
@@ -50,6 +51,8 @@ private:
 private slots:
     void call_register_widget();
     void call_config_dialog();
+
+    bool open_url(QString &url);
 };
 
 #endif // LOGIN_WIDGET_H

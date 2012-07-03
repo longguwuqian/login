@@ -37,7 +37,8 @@ config_dialog::config_dialog(QWidget *parent) :
     this->le_browser_path->setEnabled(false);
     this->le_browser_path->setReadOnly(true);
     this->btn_choose_browser->setEnabled(false);
-    this->use_default_browser = true;
+
+    config_manager::get_instance().use_default_browser(true);
 
     connect(btn_cancel, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_save, SIGNAL(clicked()), this, SLOT(close()));
@@ -52,9 +53,9 @@ config_dialog::~config_dialog()
 
 void config_dialog::choose_browser()
 {
-    this->browser_path = QFileDialog::QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("*.*"));
-    if (this->browser_path != QString::null) {
-        this->le_browser_path->setText(this->browser_path);
+    config_manager::get_instance().set_browser_path(QFileDialog::QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("*.*")));
+    if (!config_manager::get_instance().get_browser_path().isNull()) {
+        this->le_browser_path->setText(config_manager::get_instance().get_browser_path());
     }
 }
 void config_dialog::reject()
