@@ -80,3 +80,13 @@ void login_widget::call_register_widget()
     this->wgt_reg->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
     this->wgt_reg->show();
 }
+
+bool login_widget::open_url(QString &url)
+{
+    bool status = true;
+    if (url.isNull()) return false;
+    if (config_manager::get_instance().is_use_default_browser()) {
+        status = QDesktopServices::openUrl(QUrl(url));
+    }
+    return status;
+}

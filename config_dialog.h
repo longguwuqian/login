@@ -31,9 +31,12 @@ private:
 
     QGroupBox *gbx_browser;
 
+    bool __is_btn_cancel_clicked;
+
 signals:
     
 public slots:
+    void on_btn_cancel_clicked();
     void choose_browser();
     void reject();
 protected:

@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     if (translator->load("i18n_zh_CN.qm", "./translations") == false) printf("aaaa");
     a.installTranslator(translator);
 
-//QDesktopServices::openUrl(QUrl("http://www.qtcn.org"));
+//
 
     login_widget w;
     /*居中放置*/

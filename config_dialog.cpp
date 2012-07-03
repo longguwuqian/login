@@ -37,11 +37,12 @@ config_dialog::config_dialog(QWidget *parent) :
     this->le_browser_path->setEnabled(false);
     this->le_browser_path->setReadOnly(true);
     this->btn_choose_browser->setEnabled(false);
+    this->__is_btn_cancel_clicked = false;
 
     config_manager::get_instance().use_default_browser(true);
 
-    connect(btn_cancel, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_save, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btn_cancel, SIGNAL(clicked()), this, SLOT(on_btn_cancel_clicked()));
     connect(rbtn_use_manual, SIGNAL(toggled(bool)), le_browser_path, SLOT(setEnabled(bool)));
     connect(rbtn_use_manual, SIGNAL(toggled(bool)), btn_choose_browser, SLOT(setEnabled(bool)));
     connect(btn_choose_browser, SIGNAL(clicked()), this, SLOT(choose_browser()));
@@ -49,6 +50,12 @@ config_dialog::config_dialog(QWidget *parent) :
 config_dialog::~config_dialog()
 {
 
+}
+
+void config_dialog::on_btn_cancel_clicked()
+{
+    this->__is_btn_cancel_clicked = true;
+    this->close();
 }
 
 void config_dialog::choose_browser()
@@ -64,7 +71,7 @@ void config_dialog::reject()
 }
 void config_dialog::closeEvent(QCloseEvent *e)
 {
-    if (this->rbtn_use_manual->isChecked() && this->le_browser_path->text().isEmpty()) {
+    if (this->rbtn_use_manual->isChecked() && this->le_browser_path->text().isEmpty() && !this->__is_btn_cancel_clicked) {
         QMessageBox::warning(this, tr("warning"), tr("you have to choose a browser"), QMessageBox::Ok);
         e->ignore();
     } else {
