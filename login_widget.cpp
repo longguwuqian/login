@@ -10,7 +10,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
-    wgt_cv = new opencv_widget(this, 20, 500, 600, 500, 600);
+    wgt_camera = new camera_widget(this, 500, 550, 500, 550);
     wgt_right = new QWidget(this);
     btn_login = new QPushButton(tr("LOGIN"), wgt_right);
     btn_config = new QPushButton(tr("config"), wgt_right);
@@ -33,7 +33,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     le_password->setEnabled(false);
     cb_use_password->setChecked(false);
 
-    hlayout->addWidget(wgt_cv);
+    hlayout->addWidget(wgt_camera);
     hlayout->addWidget(wgt_right);
     vlayout->addWidget(lb_username);
     vlayout->addWidget(le_username);
@@ -55,13 +55,17 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     this->setWindowTitle(tr("login"));
 
     /////
-    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_cv, SLOT(save_image()));
+    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_camera, SLOT(save_image()));
     /////
     connect(cb_use_password, SIGNAL(clicked(bool)), le_password, SLOT(setEnabled(bool)));
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
     connect(btn_config, SIGNAL(clicked()), this, SLOT(call_config_dialog()));
     connect(btn_quit, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_register, SIGNAL(clicked()), this,SLOT(call_register_widget()));
+
+
+    this->btn_register->setDisabled(true);
+    this->tmp_btn_save_img->setDisabled(true);
 }
 
 login_widget::~login_widget()
@@ -76,7 +80,7 @@ void login_widget::call_config_dialog()
 }
 void login_widget::call_register_widget()
 {
-    this->wgt_reg = new register_widget(this->wgt_cv);
+    this->wgt_reg = new register_widget(this->wgt_camera);
     this->wgt_reg->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
     this->wgt_reg->show();
 }

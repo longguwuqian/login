@@ -14,7 +14,7 @@ class QString;
 
 #include <cv.h>
 #include <highgui.h>
-#include "opencv_widget.h"
+#include "camera_widget.h"
 #include "config_dialog.h"
 #include "register_widget.h"
 
@@ -43,7 +43,7 @@ private:
     QLabel *lb_username;
     QLabel *lb_password;
     QCheckBox *cb_use_password;
-    opencv_widget *wgt_cv;
+    camera_widget *wgt_camera;
     QWidget *wgt_right;
     register_widget *wgt_reg;
     config_dialog *dlg_config;

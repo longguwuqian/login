@@ -1,7 +1,7 @@
 #include "register_widget.h"
 #include <QtGui>
 
-register_widget::register_widget(opencv_widget *wgt_cv, QWidget *parent, Qt::WindowFlags f) :
+register_widget::register_widget(camera_widget *wgt_cv, QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -14,13 +14,13 @@ register_widget::register_widget(opencv_widget *wgt_cv, QWidget *parent, Qt::Win
     btn_regnow = new QPushButton("regnow", this);
     btn_cancel = new QPushButton("cancel", this);
 
-    this->wgt_cv_login = wgt_cv;
-    this->wgt_cv_login->set_disable(true);
+    this->wgt_camera_login = wgt_cv;
+    this->wgt_camera_login->set_disable(true);
     /*保证login_widget中的wgt_cv已经关闭*/
-    while (this->wgt_cv_login->is_enabled());
+    while (this->wgt_camera_login->is_enabled());
 
-    this->wgt_cv = new opencv_widget(this, 50, 400, 300, 400, 300);
-    vlayout->addWidget(this->wgt_cv);
+    this->wgt_camera = new camera_widget(this, 400, 300, 400, 300);
+    vlayout->addWidget(this->wgt_camera);
     hlayout->addWidget(btn_regnow);
     hlayout->addWidget(btn_cancel);
     vlayout->addLayout(hlayout);
@@ -30,6 +30,6 @@ register_widget::register_widget(opencv_widget *wgt_cv, QWidget *parent, Qt::Win
 }
 register_widget::~register_widget()
 {
-    delete this->wgt_cv;
-    this->wgt_cv_login->set_enable(true);
+    delete this->wgt_camera;
+    this->wgt_camera_login->set_enable(true);
 }

@@ -32,14 +32,18 @@ SOURCES += main.cpp\
         login_widget.cpp \
     config_dialog.cpp \
     register_widget.cpp \
-    opencv_widget.cpp \
-    config_manager.cpp
+    config_manager.cpp \
+    capture_thread.cpp \
+    camera_controller.cpp \
+    camera_widget.cpp
 
 HEADERS  += \
     config_dialog.h \
     register_widget.h \
-    opencv_widget.h \
     login_widget.h \
-    config_manager.h
+    config_manager.h \
+    capture_thread.h \
+    camera_controller.h \
+    camera_widget.h
 
 TRANSLATIONS += ./translations/i18n_zh_CN.ts
