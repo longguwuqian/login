@@ -11,6 +11,7 @@ class QLineEdit;
 class QCheckBox;
 class QDialog;
 class QString;
+class QProcess;
 
 #include <cv.h>
 #include <highgui.h>
@@ -42,12 +43,15 @@ private:
     QLineEdit *le_password;
     QLabel *lb_username;
     QLabel *lb_password;
+    QLabel *lb_register;
+    QLabel *lb_lostpassword;
     QCheckBox *cb_use_password;
     camera_widget *wgt_camera;
     QWidget *wgt_right;
     register_widget *wgt_reg;
     config_dialog *dlg_config;
     QString url;
+    QProcess *proc_browser;
 
 private slots:
     void call_register_widget();

@@ -13,7 +13,7 @@ void config_manager::set_browser_path(const QString &path)
 {
     if (!path.isNull()) {
         this->browser_path = path;
-        this->__use_default_browser = true;
+        this->__use_default_browser = false;
     }
 }
 

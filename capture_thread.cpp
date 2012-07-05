@@ -1,6 +1,5 @@
 #include "capture_thread.h"
 
-
 // Qt header files
 #include <QDebug>
 

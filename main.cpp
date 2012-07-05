@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QUrl>
 #include "login_widget.h"
-#include <QSingleApplication/QtSingleApplication>
+#include "QtSingleApplication"
 
 int main(int argc, char *argv[])
 {

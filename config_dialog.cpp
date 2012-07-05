@@ -60,7 +60,7 @@ void config_dialog::on_btn_cancel_clicked()
 
 void config_dialog::choose_browser()
 {
-    config_manager::get_instance().set_browser_path(QFileDialog::QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("*.*")));
+    config_manager::get_instance().set_browser_path(QFileDialog::QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("*")));
     if (!config_manager::get_instance().get_browser_path().isNull()) {
         this->le_browser_path->setText(config_manager::get_instance().get_browser_path());
     }

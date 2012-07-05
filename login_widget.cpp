@@ -21,6 +21,8 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     le_password = new QLineEdit(wgt_right);
     lb_username = new QLabel(tr("user name:"), wgt_right);
     lb_password = new QLabel(tr("pass word:"), wgt_right);
+    lb_lostpassword = new QLabel("<a href=\"http://www.qtcn.org/bbs/read.php?tid=22528\">lost password?</a>", wgt_right);
+    lb_lostpassword->setOpenExternalLinks(true);
     cb_use_password = new QCheckBox(tr("use password"), wgt_right);
 
     wgt_right->setMaximumHeight(300);
@@ -34,17 +36,22 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     le_password->setEnabled(false);
     cb_use_password->setChecked(false);
 
-    hlayout->addWidget(wgt_camera);
-    hlayout->addWidget(wgt_right);
     vlayout->addWidget(lb_username);
-    vlayout->addWidget(le_username);
+    hlayout->addWidget(le_username);
+    hlayout->addWidget(btn_register);
+    vlayout->addLayout(hlayout);
     vlayout->addWidget(lb_password);
-    vlayout->addWidget(le_password);
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(le_password);
+    hlayout->addWidget(lb_lostpassword);
+    vlayout->addLayout(hlayout);
     vlayout->addWidget(cb_use_password);
     vlayout->addWidget(btn_login);
-    vlayout->addWidget(btn_register);
     vlayout->addWidget(btn_quit);
     vlayout->addWidget(btn_config);
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(wgt_camera);
+    hlayout->addWidget(wgt_right);
 
     /////
     tmp_btn_save_img = new QPushButton("save img", wgt_right);
@@ -95,6 +102,11 @@ bool login_widget::open_url()
     if (url.isNull()) return false;
     if (config_manager::get_instance().is_use_default_browser()) {
         status = QDesktopServices::openUrl(QUrl(url));
+    } else {
+        QStringList arg_list;
+        arg_list.append(url);
+        this->proc_browser = new QProcess;
+        this->proc_browser->start(config_manager::get_instance().get_browser_path(), arg_list, QIODevice::ReadWrite);
     }
     return status;
 }
