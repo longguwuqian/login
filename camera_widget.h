@@ -30,7 +30,7 @@ class camera_widget : public QWidget {
         bool is_disabled();
     public slots:
         void save_image();
-        void update_frame(const QImage &img_frame);
+        void update_frame(QImage *img_frame);
 };
 
 #endif // QOPENCVWIDGET_H

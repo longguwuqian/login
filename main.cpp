@@ -2,6 +2,7 @@
 #include <QDesktopWidget>
 #include <QTranslator>
 #include <QDesktopServices>
+#include <QMessageBox>
 #include <QUrl>
 #include "login_widget.h"
 #include <QSingleApplication/QtSingleApplication>
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
     QtSingleApplication a(argc, argv);
     if (a.isRunning())
     {
+        QMessageBox::information(0, QObject::tr("login"), QObject::tr("An instance has already been running!"));
         return 0;
     }
 

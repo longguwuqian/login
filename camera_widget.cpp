@@ -14,7 +14,7 @@ camera_widget::camera_widget(QWidget *parent, int max_width, int max_height, int
     this->camera_ctlr = new camera_controller(0);
     this->camera_ctlr->start_capture_thread();
 
-    connect(this->camera_ctlr->cpt_thread, SIGNAL(new_frame(QImage)), this, SLOT(update_frame(QImage)));
+    connect(this->camera_ctlr->cpt_thread, SIGNAL(new_frame(QImage *)), this, SLOT(update_frame(QImage *)));
 }
 
 camera_widget::~camera_widget(void)
@@ -49,7 +49,10 @@ bool camera_widget::is_disabled()
     return false;
 }
 
-void camera_widget::update_frame(const QImage &img_frame)
+void camera_widget::update_frame(QImage *img_frame)
 {
-    this->lb_frame->setPixmap(QPixmap::fromImage(img_frame.scaled(lb_frame->width(), lb_frame->height())));
+    QPainter *_img_painter = new QPainter(img_frame);
+    _img_painter->drawRect(img_frame->width() / 2 - 200, img_frame->height() / 2 - 200, 300, 350);
+    _img_painter->end();
+    this->lb_frame->setPixmap(QPixmap::fromImage(*img_frame));//.scaled(lb_frame->width(), lb_frame->height())));
 }

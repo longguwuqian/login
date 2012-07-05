@@ -44,7 +44,7 @@ void capture_thread::run()
         stopped_mutex.unlock();
         // Capture and add frame to buffer
         this->cvimage2qimage(cvQueryFrame(capture), this->img_frame);
-        emit new_frame(this->img_frame);
+        emit new_frame(&this->img_frame);
         // Update statistics
     }
     qDebug() << "Stopping capture thread...";
@@ -53,7 +53,7 @@ void capture_thread::run()
 QImage &capture_thread::get_frame()
 {
     static QImage _img;
-    _img = this->img_frame;
+    _img = this->img_frame.copy(this->img_frame.width() / 2 - 200, this->img_frame.height() / 2 - 200, 300, 350);
     return _img;
 }
 

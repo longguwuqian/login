@@ -32,7 +32,7 @@ private:
 protected:
     void run();
 signals:
-    void new_frame(const QImage &frame);
+    void new_frame(QImage *frame);
 };
 
 
