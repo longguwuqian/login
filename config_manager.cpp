@@ -6,7 +6,6 @@ config_manager::config_manager()
 }
 config_manager::~config_manager()
 {
-
 }
 
 void config_manager::set_browser_path(const QString &path)

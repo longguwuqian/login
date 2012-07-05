@@ -6,8 +6,8 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
 {
     /*禁止改变大小*/
-    this->setMaximumSize(800, 650);
-    this->setMinimumSize(800, 650);
+    this->setMaximumSize(800, 560);
+    this->setMinimumSize(800, 560);
 
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
@@ -21,7 +21,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     le_password = new QLineEdit(wgt_right);
     lb_username = new QLabel(tr("user name:"), wgt_right);
     lb_password = new QLabel(tr("pass word:"), wgt_right);
-    lb_lostpassword = new QLabel("<a href=\"http://www.qtcn.org/bbs/read.php?tid=22528\">lost password?</a>", wgt_right);
+    lb_lostpassword = new QLabel("<a href=\"http://user.qzone.qq.com/657166483\">lost password?</a>", wgt_right);
     lb_lostpassword->setOpenExternalLinks(true);
     cb_use_password = new QCheckBox(tr("use password"), wgt_right);
 

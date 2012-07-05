@@ -49,7 +49,6 @@ config_dialog::config_dialog(QWidget *parent) :
 }
 config_dialog::~config_dialog()
 {
-
 }
 
 void config_dialog::on_btn_cancel_clicked()
