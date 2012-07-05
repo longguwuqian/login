@@ -6,6 +6,7 @@
 camera_controller::camera_controller(int device_num)
 {
     cpt_thread = new capture_thread(device_num);
+    this->dev_num = device_num;
 } // Controller constructor
 
 camera_controller::~camera_controller()
@@ -16,7 +17,7 @@ camera_controller::~camera_controller()
 
 void camera_controller::connect_camera()
 {
-    this->cpt_thread->connect_camera();
+    this->cpt_thread->connect_camera(this->dev_num);
 }
 
 void camera_controller::disconnect_camera()

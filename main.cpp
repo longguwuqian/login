@@ -4,16 +4,21 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include "login_widget.h"
+#include <QSingleApplication/QtSingleApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    /*只允许运行一个实例*/
+    QtSingleApplication a(argc, argv);
+    if (a.isRunning())
+    {
+        return 0;
+    }
+
     /*设置语言*/
     QTranslator *translator = new QTranslator(0);
     if (translator->load("i18n_zh_CN.qm", "./translations") == false) printf("aaaa");
     a.installTranslator(translator);
-
-//
 
     login_widget w;
     /*居中放置*/

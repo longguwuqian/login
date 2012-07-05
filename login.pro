@@ -16,6 +16,8 @@ unix{
     PKGCONFIG += opencv
 }
 
+include(./QSingleApplication/qtsingleapplication.pri)
+
 win32{
     INCLUDEPATH += "C:/opencv/opencv/build/include/opencv" \
                    "C:/opencv/opencv/build/include"

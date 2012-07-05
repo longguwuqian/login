@@ -24,5 +24,8 @@ public:
     void delete_capture_thread();
     int get_input_source_width();
     int get_input_source_height();
+
+private:
+    int dev_num;
 };
 #endif // CAMERA_CONTROLLER_H
