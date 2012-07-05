@@ -34,9 +34,6 @@ void capture_thread::run()
 {
     while(1)
     {
-        /////////////////////////////////
-        // Stop thread if stopped=TRUE //
-        /////////////////////////////////
         stopped_mutex.lock();
         if (stopped)
         {
@@ -45,12 +42,6 @@ void capture_thread::run()
             break;
         }
         stopped_mutex.unlock();
-        /////////////////////////////////
-        /////////////////////////////////
-        // Save capture time
-        capture_time=t.elapsed();
-        // Start timer (used to calculate capture rate)
-        t.start();
         // Capture and add frame to buffer
         this->cvimage2qimage(cvQueryFrame(capture), this->img_frame);
         emit new_frame(this->img_frame);
@@ -59,10 +50,25 @@ void capture_thread::run()
     qDebug() << "Stopping capture thread...";
 } // run()
 
+QImage &capture_thread::get_frame()
+{
+    static QImage _img;
+    _img = this->img_frame;
+    return _img;
+}
+
+void capture_thread::connect_camera(int device_num)
+{
+    if (!this->is_camera_connected() && this->stopped) {
+        capture=cvCaptureFromCAM(device_num);
+    }
+}
+
 void capture_thread::disconnect_camera()
 {
     // Disconnect camera if connected
-    if(capture!=NULL)
+    if (!this->stopped) this->stop_capture_thread();
+    if (capture!=NULL)
     {
         cvReleaseCapture(&capture);
         if(capture==NULL)

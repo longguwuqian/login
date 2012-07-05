@@ -17,11 +17,12 @@ public:
     ~camera_controller();
     capture_thread *cpt_thread;
     void disconnect_camera();
+    void connect_camera();
+    bool is_camera_connected();
     void start_capture_thread();
     void stop_capture_thread();
     void delete_capture_thread();
     int get_input_source_width();
     int get_input_source_height();
-
 };
 #endif // CAMERA_CONTROLLER_H

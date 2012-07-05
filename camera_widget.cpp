@@ -25,8 +25,10 @@ camera_widget::~camera_widget(void)
 
 void camera_widget::save_image()
 {
-//    QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), tr("save file dialog"), ".", tr("*.png"));
-//    if (path != NULL) img.save(path);
+    this->camera_ctlr->stop_capture_thread();
+    QString path = QFileDialog::getSaveFileName((QWidget *)this->parent(), tr("save file dialog"), ".", tr("*.png"));
+    if (path != NULL) this->camera_ctlr->cpt_thread->get_frame().save(path);
+    this->camera_ctlr->start_capture_thread();
 }
 void camera_widget::set_enable(bool b)
 {

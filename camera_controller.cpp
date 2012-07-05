@@ -14,10 +14,20 @@ camera_controller::~camera_controller()
     cpt_thread->disconnect_camera();
 } // Controller destructor
 
+void camera_controller::connect_camera()
+{
+    this->cpt_thread->connect_camera();
+}
+
 void camera_controller::disconnect_camera()
 {
     cpt_thread->disconnect_camera();
 } // disconnectCamera()
+
+bool camera_controller::is_camera_connected()
+{
+    return this->cpt_thread->is_camera_connected();
+}
 
 void camera_controller::start_capture_thread()
 {

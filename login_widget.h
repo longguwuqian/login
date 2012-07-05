@@ -47,12 +47,13 @@ private:
     QWidget *wgt_right;
     register_widget *wgt_reg;
     config_dialog *dlg_config;
+    QString url;
 
 private slots:
     void call_register_widget();
     void call_config_dialog();
 
-    bool open_url(QString &url);
+    bool open_url();
 };
 
 #endif // LOGIN_WIDGET_H

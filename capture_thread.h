@@ -14,22 +14,20 @@ class capture_thread : public QThread
 
 public:
     capture_thread(int device_num);
+    void connect_camera(int device_num);
     void disconnect_camera();
     void stop_capture_thread();
     bool is_camera_connected();
     int get_input_source_width();
     int get_input_source_height();
+    QImage &get_frame();
 
     void cvimage2qimage(const IplImage* cvimage, QImage &qimage);
 
 private:
-
     QImage img_frame;
     CvCapture *capture;
-    QTime t;
     QMutex stopped_mutex;
-    QMutex save_file_mutex;
-    int capture_time;
     volatile bool stopped;
 protected:
     void run();

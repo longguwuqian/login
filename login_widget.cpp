@@ -1,5 +1,6 @@
 #include <QtGui>
 #include "login_widget.h"
+#include "config_manager.h"
 
 login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
@@ -63,9 +64,12 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     connect(btn_quit, SIGNAL(clicked()), this, SLOT(close()));
     connect(btn_register, SIGNAL(clicked()), this,SLOT(call_register_widget()));
 
+    this->url = "http://baidu.com";
+
+    connect(btn_login, SIGNAL(clicked()), this, SLOT(open_url()));
+
 
     this->btn_register->setDisabled(true);
-    this->tmp_btn_save_img->setDisabled(true);
 }
 
 login_widget::~login_widget()
@@ -85,7 +89,7 @@ void login_widget::call_register_widget()
     this->wgt_reg->show();
 }
 
-bool login_widget::open_url(QString &url)
+bool login_widget::open_url()
 {
     bool status = true;
     if (url.isNull()) return false;
