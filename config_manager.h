@@ -13,10 +13,12 @@ public:
     bool is_use_default_browser();
     bool save_config();
     bool load_config();
+    QString get_login_url() const;
 
 private:
     config_manager();
 
+    QString login_url;
     QString browser_path;
     bool __use_default_browser;
 };

@@ -1,10 +1,5 @@
 #ifndef CAMERA_CONTROLLER_H
 #define CAMERA_CONTROLLER_H
-
-
-// Qt header files
-#include <QtGui>
-// OpenCV header files
 #include "highgui.h"
 #include "capture_thread.h"
 

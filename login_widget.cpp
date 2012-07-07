@@ -37,9 +37,6 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     tmp_btn_save_img = new QPushButton("save img");
 
-//    le_username->setText(tr("USERNAME"));
-//    le_password->setText(tr("PASSWORD"));
-
     hlayout->addWidget(lb_username);
     hlayout->addWidget(le_username);
     hlayout->addWidget(lb_password);
@@ -66,9 +63,6 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     this->setLayout(vlayout);
     this->setWindowTitle(tr("login"));
 
-    /////
-//    connect(tmp_btn_save_img, SIGNAL(clicked()), wgt_camera, SLOT(save_image()));
-    /////
     connect(cb_use_password, SIGNAL(clicked(bool)), le_password, SLOT(setEnabled(bool)));
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
     connect(btn_config, SIGNAL(clicked()), this, SLOT(call_config_dialog()));
@@ -76,9 +70,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     connect(tmp_btn_save_img, SIGNAL(clicked()), this->wgt_camera, SLOT(save_image()));
 //    connect(btn_register, SIGNAL(clicked()), this,SLOT(call_register_widget()));
 
-    this->url = "http://baidu.com";
-
-    connect(btn_login, SIGNAL(clicked()), this, SLOT(open_url()));
+    connect(btn_login, SIGNAL(clicked()), this, SLOT(open_login_url()));
 
     this->btn_register->setDisabled(true);
 
@@ -94,22 +86,22 @@ void login_widget::call_config_dialog()
     this->dlg_config = new config_dialog(this->wgt_down);
     this->dlg_config->exec();
 }
-void login_widget::call_register_widget()
+void login_widget::call_registration_wizard()
 {
-    this->wgt_reg = new register_widget(this->wgt_camera);
-    this->wgt_reg->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
-    this->wgt_reg->show();
+//    this->wgt_reg = new register_widget(this->wgt_camera);
+//    this->wgt_reg->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
+//    this->wgt_reg->show();
 }
 
-bool login_widget::open_url()
+bool login_widget::open_login_url()
 {
     bool status = true;
-    if (url.isNull()) return false;
+    if (config_manager::get_instance().get_login_url().isNull()) return false;
     if (config_manager::get_instance().is_use_default_browser()) {
-        status = QDesktopServices::openUrl(QUrl(url));
+        status = QDesktopServices::openUrl(QUrl(config_manager::get_instance().get_login_url()));
     } else {
         QStringList arg_list;
-        arg_list.append(url);
+        arg_list.append(config_manager::get_instance().get_login_url());
         this->proc_browser = new QProcess;
         this->proc_browser->start(config_manager::get_instance().get_browser_path(), arg_list, QIODevice::ReadWrite);
     }

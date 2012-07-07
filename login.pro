@@ -35,7 +35,6 @@ win32{
 SOURCES += main.cpp\
         login_widget.cpp \
     config_dialog.cpp \
-    register_widget.cpp \
     config_manager.cpp \
     capture_thread.cpp \
     camera_controller.cpp \
@@ -43,7 +42,6 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     config_dialog.h \
-    register_widget.h \
     login_widget.h \
     config_manager.h \
     capture_thread.h \

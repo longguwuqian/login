@@ -24,7 +24,7 @@
     <message>
         <location filename="../camera_widget.cpp" line="31"/>
         <source>*.png</source>
-        <translation type="unfinished"></translation>
+        <translation>*.png</translation>
     </message>
 </context>
 <context>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../config_dialog.cpp" line="9"/>
         <source>choose browser...</source>
-        <translation>选择浏览器</translation>
+        <translation>选择浏览器…</translation>
     </message>
     <message>
         <location filename="../config_dialog.cpp" line="10"/>
@@ -73,7 +73,7 @@
     <message>
         <location filename="../config_dialog.cpp" line="62"/>
         <source>*</source>
-        <translation type="unfinished"></translation>
+        <translation>*</translation>
     </message>
     <message>
         <location filename="../config_dialog.cpp" line="74"/>

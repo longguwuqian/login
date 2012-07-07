@@ -1,6 +1,5 @@
-#ifndef SETTINGS_DIALOG_H
-#define SETTINGS_DIALOG_H
-
+#ifndef CONFIG_DIALOG_H
+#define CONFIG_DIALOG_H
 #include <QDialog>
 #include "config_manager.h"
 

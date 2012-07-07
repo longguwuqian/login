@@ -1,5 +1,5 @@
-#include "capture_thread.h"
 #include <QDebug>
+#include "capture_thread.h"
 
 capture_thread::capture_thread(int device_num):QThread()
 {
@@ -11,7 +11,7 @@ void capture_thread::cvimage2qimage(const IplImage *cvimage, QImage &qimage)
 {
     static IplImage *_cvimage;
     if (!cvimage)
-            return;
+        return;
     qimage = QImage(QSize(cvimage->width, cvimage->height), QImage::Format_RGB888);
     _cvimage = cvCreateImageHeader(cvSize(cvimage->width, cvimage->height), 8, 3);
     _cvimage->imageData = (char *)qimage.bits();
@@ -21,11 +21,9 @@ void capture_thread::cvimage2qimage(const IplImage *cvimage, QImage &qimage)
 
 void capture_thread::run()
 {
-    while(1)
-    {
+    while(1) {
         stopped_mutex.lock();
-        if (stopped)
-        {
+        if (stopped) {
             stopped=false;
             stopped_mutex.unlock();
             break;
@@ -54,8 +52,7 @@ void capture_thread::connect_camera(int device_num)
 void capture_thread::disconnect_camera()
 {
     if (!this->stopped) this->stop_capture_thread();
-    if (capture!=NULL)
-    {
+    if (capture!=NULL) {
         cvReleaseCapture(&capture);
         if(capture==NULL)
             qDebug() << "Camera successfully disconnected.";

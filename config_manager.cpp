@@ -3,6 +3,7 @@
 config_manager::config_manager()
 {
     __use_default_browser = true;
+    login_url = "http://www.baidu.com";
 }
 config_manager::~config_manager()
 {
@@ -29,4 +30,9 @@ void config_manager::use_default_browser(bool b)
 bool config_manager::is_use_default_browser()
 {
     return this->__use_default_browser;
+}
+
+QString config_manager::get_login_url() const
+{
+    return login_url;
 }

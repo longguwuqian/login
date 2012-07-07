@@ -1,5 +1,5 @@
+#include <QDebug>
 #include "camera_controller.h"
-#include <QtGui>
 
 camera_controller::camera_controller(int device_num)
 {

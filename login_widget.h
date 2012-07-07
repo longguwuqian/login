@@ -17,7 +17,6 @@ class QProcess;
 #include <highgui.h>
 #include "camera_widget.h"
 #include "config_dialog.h"
-#include "register_widget.h"
 
 class login_widget : public QWidget
 {
@@ -48,16 +47,14 @@ private:
     QCheckBox *cb_use_password;
     camera_widget *wgt_camera;
     QWidget *wgt_down;
-    register_widget *wgt_reg;
     config_dialog *dlg_config;
-    QString url;
     QProcess *proc_browser;
 
 private slots:
-    void call_register_widget();
+    void call_registration_wizard();
     void call_config_dialog();
 
-    bool open_url();
+    bool open_login_url();
 };
 
 #endif // LOGIN_WIDGET_H

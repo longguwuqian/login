@@ -1,10 +1,8 @@
 #ifndef CAPTURE_THREAD_H
 #define CAPTURE_THREAD_H
-
-// Qt header files
 #include <QThread>
-#include <QtGui>
-// OpenCV header files
+#include <QImage>
+#include <QMutex>
 #include "highgui.h"
 #include "cv.h"
 
