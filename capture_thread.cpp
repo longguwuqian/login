@@ -40,7 +40,7 @@ void capture_thread::run()
 QImage &capture_thread::get_frame()
 {
     static QImage _img;
-    _img = this->img_frame.copy(this->img_frame.width() / 2 - 200, this->img_frame.height() / 2 - 200, 300, 350);
+    _img = this->img_frame.copy(this->img_frame.width() / 2 - 150, this->img_frame.height() / 2 - 170, 300, 340);
     return _img;
 }
 

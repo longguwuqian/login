@@ -35,6 +35,7 @@ private:
 
     QHBoxLayout *hlayout;
     QVBoxLayout *vlayout;
+    QVBoxLayout *vlayout_2;
     QPushButton *btn_login;
     QPushButton *btn_config;
     QPushButton *btn_quit;
@@ -43,11 +44,10 @@ private:
     QLineEdit *le_password;
     QLabel *lb_username;
     QLabel *lb_password;
-    QLabel *lb_register;
     QLabel *lb_lostpassword;
     QCheckBox *cb_use_password;
     camera_widget *wgt_camera;
-    QWidget *wgt_right;
+    QWidget *wgt_down;
     register_widget *wgt_reg;
     config_dialog *dlg_config;
     QString url;

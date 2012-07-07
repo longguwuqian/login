@@ -19,6 +19,7 @@ class camera_widget : public QWidget {
     private:
         QLabel *lb_frame;
         QVBoxLayout *layout;
+        QImage *img_border;
 
         camera_controller *camera_ctlr;
     public:
