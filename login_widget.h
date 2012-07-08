@@ -38,7 +38,6 @@ private:
     QPushButton *btn_login;
     QPushButton *btn_config;
     QPushButton *btn_quit;
-    QPushButton *btn_register;
     QLineEdit *le_username;
     QLineEdit *le_password;
     QLabel *lb_username;
@@ -51,7 +50,6 @@ private:
     QProcess *proc_browser;
 
 private slots:
-    void call_registration_wizard();
     void call_config_dialog();
 
     bool open_login_url();

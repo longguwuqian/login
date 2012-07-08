@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QImage>
 #include <QFileDialog>
+#include <QMutex>
 
 #include "cv.h"
 #include "highgui.h"
@@ -29,7 +30,7 @@ class camera_widget : public QWidget {
 //        bool is_disabled();
     public slots:
         void save_image();
-        void update_frame(QImage *img_frame);
+        void update_frame(QImage *img_frame, QMutex *update_done_mutex);
 };
 
 #endif // QOPENCVWIDGET_H

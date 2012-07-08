@@ -26,11 +26,12 @@ private:
     QImage img_frame;
     CvCapture *capture;
     QMutex stopped_mutex;
+    QMutex update_done_mutex;
     volatile bool stopped;
 protected:
     void run();
 signals:
-    void new_frame(QImage *frame);
+    void new_frame(QImage *frame, QMutex *update_done_mutex);
 };
 
 

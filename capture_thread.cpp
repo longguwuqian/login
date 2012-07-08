@@ -3,8 +3,8 @@
 
 capture_thread::capture_thread(int device_num):QThread()
 {
-    capture=cvCaptureFromCAM(device_num);
-    stopped=false;
+    capture = cvCaptureFromCAM(device_num);
+    stopped = false;
 }
 
 void capture_thread::cvimage2qimage(const IplImage *cvimage, QImage &qimage)
@@ -24,13 +24,16 @@ void capture_thread::run()
     while(1) {
         stopped_mutex.lock();
         if (stopped) {
-            stopped=false;
+            stopped = false;
             stopped_mutex.unlock();
             break;
         }
         stopped_mutex.unlock();
+        update_done_mutex.lock();
         this->cvimage2qimage(cvQueryFrame(capture), this->img_frame);
-        emit new_frame(&this->img_frame);
+        emit new_frame(&this->img_frame, &this->update_done_mutex);
+//        update_done_mutex.unlock();
+
     }
     qDebug() << "Stopping capture thread...";
 }

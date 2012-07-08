@@ -14,7 +14,7 @@ camera_widget::camera_widget(QWidget *parent, int max_width, int max_height, int
     this->img_border = new QImage("border.png");
     assert(!this->img_border->isNull());
 
-    connect(this->camera_ctlr->cpt_thread, SIGNAL(new_frame(QImage *)), this, SLOT(update_frame(QImage *)));
+    connect(this->camera_ctlr->cpt_thread, SIGNAL(new_frame(QImage *, QMutex *)), this, SLOT(update_frame(QImage *, QMutex *)));
 }
 
 camera_widget::~camera_widget(void)
@@ -31,11 +31,13 @@ void camera_widget::save_image()
     this->camera_ctlr->start_capture_thread();
 }
 
-void camera_widget::update_frame(QImage *img_frame)
+void camera_widget::update_frame(QImage *img_frame, QMutex *update_done_mutex)
 {
+//    update_done_mutex->lock();
     QPainter *_img_painter = new QPainter(img_frame);
     _img_painter->setOpacity(0.4);
     _img_painter->drawImage(img_frame->width() / 2 - 170, img_frame->height() / 2 - 190, *this->img_border);
     _img_painter->end();
     this->lb_frame->setPixmap(QPixmap::fromImage(*img_frame));
+    update_done_mutex->unlock();
 }

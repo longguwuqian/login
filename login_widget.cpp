@@ -17,8 +17,6 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     btn_login = new QPushButton(tr("LOGIN"), wgt_down);
     btn_config = new QPushButton(tr("config"), wgt_down);
     btn_quit = new QPushButton(tr("Quit"), wgt_down);
-    btn_register = new QPushButton(tr("Register"), wgt_down);
-    btn_register->setVisible(false);
     le_username = new QLineEdit(wgt_down);
     le_password = new QLineEdit(wgt_down);
     lb_username = new QLabel(tr("user name:"), wgt_down);
@@ -72,8 +70,6 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
     connect(btn_login, SIGNAL(clicked()), this, SLOT(open_login_url()));
 
-    this->btn_register->setDisabled(true);
-
 //    this->setStyleSheet("QPushButton{color:red;background-color:black;}");
 }
 
@@ -85,12 +81,6 @@ void login_widget::call_config_dialog()
 {
     this->dlg_config = new config_dialog(this->wgt_down);
     this->dlg_config->exec();
-}
-void login_widget::call_registration_wizard()
-{
-//    this->wgt_reg = new register_widget(this->wgt_camera);
-//    this->wgt_reg->setWindowModality(Qt::ApplicationModal);//阻塞其他窗口
-//    this->wgt_reg->show();
 }
 
 bool login_widget::open_login_url()
