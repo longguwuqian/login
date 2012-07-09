@@ -22,17 +22,11 @@ private:
     QPushButton *btn_save;
     QPushButton *btn_cancel;
     QPushButton *btn_choose_browser;
-
     QRadioButton *rbtn_use_default;
     QRadioButton *rbtn_use_manual;
-
     QLineEdit *le_browser_path;
-
     QGroupBox *gbx_browser;
-
     bool __is_btn_cancel_clicked;
-
-signals:
     
 public slots:
     void on_btn_cancel_clicked();

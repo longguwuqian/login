@@ -5,6 +5,9 @@ capture_thread::capture_thread(int device_num):QThread()
 {
     capture = cvCaptureFromCAM(device_num);
     stopped = false;
+    update_done = true;
+    this->img_border = new QImage("border.png");
+    assert(!this->img_border->isNull());
 }
 
 void capture_thread::cvimage2qimage(const IplImage *cvimage, QImage &qimage)
@@ -30,10 +33,16 @@ void capture_thread::run()
         }
         stopped_mutex.unlock();
         update_done_mutex.lock();
+        while (!update_done) update_done_condition.wait(&update_done_mutex);
+        update_done = false;
         this->cvimage2qimage(cvQueryFrame(capture), this->img_frame);
-        emit new_frame(&this->img_frame, &this->update_done_mutex);
-//        update_done_mutex.unlock();
-
+        _img_painter = new QPainter(&this->img_frame);
+        _img_painter->setOpacity(0.4);
+        _img_painter->drawImage(img_frame.width() / 2 - 170, img_frame.height() / 2 - 190, *this->img_border);
+        _img_painter->end();
+        delete _img_painter;
+        emit new_frame(&this->img_frame, &this->update_done_mutex, &this->update_done_condition, &this->update_done);
+        update_done_mutex.unlock();
     }
     qDebug() << "Stopping capture thread...";
 }
@@ -41,7 +50,7 @@ void capture_thread::run()
 QImage &capture_thread::get_frame()
 {
     static QImage _img;
-    _img = this->img_frame.copy(this->img_frame.width() / 2 - 150, this->img_frame.height() / 2 - 170, 300, 340);
+    _img = this->img_frame.copy(this->img_frame.width() / 2 - 170, this->img_frame.height() / 2 - 190, 300, 340);
     return _img;
 }
 

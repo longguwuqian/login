@@ -9,7 +9,9 @@ camera_controller::camera_controller(int device_num)
 
 camera_controller::~camera_controller()
 {
+    cpt_thread->stop_capture_thread();
     cpt_thread->disconnect_camera();
+    delete_capture_thread();
 }
 
 void camera_controller::connect_camera()
@@ -54,7 +56,3 @@ int camera_controller::get_input_source_height()
 {
     return cpt_thread->get_input_source_height();
 }
-
-
-
-
