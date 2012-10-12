@@ -53,11 +53,6 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     vlayout->addWidget(wgt_camera);
     vlayout->addWidget(wgt_down);
 
-    /////
-//    tmp_btn_save_img = new QPushButton("save img", wgt_down);
-//    vlayout->addWidget(tmp_btn_save_img);
-    /////
-
     this->setLayout(vlayout);
     this->setWindowTitle(tr("login"));
 
@@ -65,12 +60,9 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
     connect(btn_config, SIGNAL(clicked()), this, SLOT(call_config_dialog()));
     connect(btn_quit, SIGNAL(clicked()), this, SLOT(close()));
-    connect(tmp_btn_save_img, SIGNAL(clicked()), this->wgt_camera, SLOT(save_image()));
-//    connect(btn_register, SIGNAL(clicked()), this,SLOT(call_register_widget()));
+    connect(tmp_btn_save_img, SIGNAL(clicked()), this->wgt_camera, SLOT(save_image_tmp()));
 
     connect(btn_login, SIGNAL(clicked()), this, SLOT(open_login_url()));
-
-//    this->setStyleSheet("QPushButton{color:red;background-color:black;}");
 }
 
 login_widget::~login_widget()
