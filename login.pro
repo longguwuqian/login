@@ -39,9 +39,6 @@ SOURCES += main.cpp\
     capture_thread.cpp \
     camera_controller.cpp \
     camera_widget.cpp \
-    face_recognition.cpp \
-    face_recognition/MatrixOper.cpp \
-    face_recognition/AffineTrans.cpp
 
 HEADERS  += \
     config_dialog.h \
@@ -50,11 +47,6 @@ HEADERS  += \
     capture_thread.h \
     camera_controller.h \
     camera_widget.h \
-    face_recognition.h \
-    face_recognition/MemoryOper.h \
-    face_recognition/MatrixOper.h \
-    face_recognition/BasicDataType.h \
-    face_recognition/AffineTrans.h
 
 TRANSLATIONS += ./translations/i18n_zh_CN.ts
 
