@@ -1,6 +1,6 @@
 #include <QtGui>
 #include "login_widget.h"
-#include "config_manager.h"
+//#include "config_manager.h"
 
 login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
@@ -33,7 +33,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     le_password->setEnabled(false);
     cb_use_password->setChecked(false);
 
-    tmp_btn_save_img = new QPushButton("save img");
+//    tmp_btn_save_img = new QPushButton("save img");
 
     hlayout->addWidget(lb_username);
     hlayout->addWidget(le_username);
@@ -46,7 +46,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     hlayout->addWidget(btn_config);
     hlayout->addWidget(btn_quit);
     hlayout->addWidget(lb_lostpassword);
-    hlayout->addWidget(tmp_btn_save_img);
+//    hlayout->addWidget(tmp_btn_save_img);
     vlayout_2->addLayout(hlayout);
 
     wgt_down->setLayout(vlayout_2);
@@ -60,9 +60,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     connect(cb_use_password, SIGNAL(clicked()), le_password, SLOT(clear()));
     connect(btn_config, SIGNAL(clicked()), this, SLOT(call_config_dialog()));
     connect(btn_quit, SIGNAL(clicked()), this, SLOT(close()));
-    connect(tmp_btn_save_img, SIGNAL(clicked()), this->wgt_camera, SLOT(save_image_tmp()));
-
-    connect(btn_login, SIGNAL(clicked()), this, SLOT(open_login_url()));
+//    connect(tmp_btn_save_img, SIGNAL(clicked()), this->wgt_camera, SLOT(save_image_tmp()));
 }
 
 login_widget::~login_widget()
@@ -75,17 +73,4 @@ void login_widget::call_config_dialog()
     this->dlg_config->exec();
 }
 
-bool login_widget::open_login_url()
-{
-    bool status = true;
-    if (config_manager::get_instance().get_login_url().isNull()) return false;
-    if (config_manager::get_instance().is_use_default_browser()) {
-        status = QDesktopServices::openUrl(QUrl(config_manager::get_instance().get_login_url()));
-    } else {
-        QStringList arg_list;
-        arg_list.append(config_manager::get_instance().get_login_url());
-        this->proc_browser = new QProcess;
-        this->proc_browser->start(config_manager::get_instance().get_browser_path(), arg_list, QIODevice::ReadWrite);
-    }
-    return status;
-}
+

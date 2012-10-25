@@ -30,23 +30,18 @@ win32{
             "C:/opencv/lib/libopencv_features2d241.dll.a" \
             "C:/opencv/lib/libopencv_highgui241.dll.a" \
             "C:/opencv/lib/libopencv_video241.dll.a" \
+            "C:/opencv/lib/libopencv_imgproc241.dll.a"
 }
 
 SOURCES += main.cpp\
-        login_widget.cpp \
-    config_dialog.cpp \
     config_manager.cpp \
     capture_thread.cpp \
     camera_controller.cpp \
-    camera_widget.cpp \
 
 HEADERS  += \
-    config_dialog.h \
-    login_widget.h \
     config_manager.h \
     capture_thread.h \
     camera_controller.h \
-    camera_widget.h \
 
 TRANSLATIONS += ./translations/i18n_zh_CN.ts
 
@@ -55,3 +50,19 @@ HEADERS += \
 
 SOURCES += \
     tcp_sender.cpp
+
+HEADERS += \
+    ui/login_widget.h \
+    ui/config_dialog.h \
+    ui/camera_widget.h
+
+SOURCES += \
+    ui/login_widget.cpp \
+    ui/config_dialog.cpp \
+    ui/camera_widget.cpp
+
+HEADERS += \
+    login_client.h
+
+SOURCES += \
+    login_client.cpp
