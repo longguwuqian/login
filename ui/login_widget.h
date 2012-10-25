@@ -21,15 +21,16 @@ class QProcess;
 class login_widget : public QWidget
 {
     Q_OBJECT
-
 public:
     login_widget(QWidget *parent = 0, Qt::WindowFlags f = Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
     ~login_widget();
 
-private:
+    camera_widget *wgt_camera;
 
+//private:
+//public:
     /////
-    QPushButton *tmp_btn_save_img;
+//    QPushButton *tmp_btn_save_img;
     /////
 
     QHBoxLayout *hlayout;
@@ -44,15 +45,11 @@ private:
     QLabel *lb_password;
     QLabel *lb_lostpassword;
     QCheckBox *cb_use_password;
-    camera_widget *wgt_camera;
     QWidget *wgt_down;
     config_dialog *dlg_config;
-    QProcess *proc_browser;
 
 private slots:
     void call_config_dialog();
-
-    bool open_login_url();
 };
 
 #endif // LOGIN_WIDGET_H

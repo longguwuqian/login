@@ -4,7 +4,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QUrl>
-#include "login_widget.h"
+#include "login_client.h"
 #include "QtSingleApplication"
 
 int main(int argc, char *argv[])
@@ -24,11 +24,7 @@ int main(int argc, char *argv[])
     a.installTranslator(translator1);
     a.installTranslator(translator2);
 
-    login_widget w;
-    w.setStyleSheet("QWidget {background-color: beige;}QLabel, QAbstractButton {font: bold;}QPushButton {background-color: palegoldenrod; border-width: 2px; border-color: darkkhaki; border-style: solid; border-radius: 5; padding: 3px; min-width: 9ex; min-height: 2.5ex; } QPushButton:hover {background-color: khaki; }QPushButton:pressed { padding-left: 5px; padding-top: 5px; background-color: #d0d67c;}");
-    /*居中放置*/
-    w.move((QApplication::desktop()->width() - w.width()) / 2, (QApplication::desktop()->height() - w.height()) / 2);
-
-    w.show();
+    login_client lc;
+    lc.start();
     return a.exec();
 }
