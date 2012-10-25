@@ -13,6 +13,7 @@ login_client::login_client(QObject *parent) :
 
     connect(this->camera_ctl->cpt_thread, SIGNAL(new_frame(QImage *, QMutex *, QWaitCondition *, volatile bool *)), this->wgt_login->wgt_camera, SLOT(update_frame(QImage *, QMutex *, QWaitCondition *, volatile bool *)));
     connect(this->wgt_login->btn_login, SIGNAL(clicked()), this, SLOT(login()));
+    connect(this->tcp_sdr, SIGNAL(get_url_done()), this, SLOT(get_login_status()));
 }
 
 login_client::~login_client()
@@ -39,17 +40,18 @@ void login_client::send_img()
     if (this->img_tmp_file != NULL) delete this->img_tmp_file;
     this->img_tmp_file = new QTemporaryFile();
     if (this->img_tmp_file->open()) {
-        //this->img_tmp_file->close();
-        if (this->camera_ctl->cpt_thread->get_frame().save(this->img_tmp_file->fileName(), "png")) qDebug() << "saaaaaaaaaaa";
-        qDebug() << this->img_tmp_file->fileName();
+        this->camera_ctl->cpt_thread->get_frame().save(this->img_tmp_file->fileName(), "png");
     }
     this->tcp_sdr->send(this->img_tmp_file);
     this->camera_ctl->start_capture_thread();
 }
 
-bool login_client::login()
+void login_client::login()
 {
     this->send_img();
+}
+bool login_client::get_login_status()
+{
     bool status = true;
     if (config_manager::get_instance().get_login_url().isNull()) return false;
     if (config_manager::get_instance().is_use_default_browser()) {

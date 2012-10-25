@@ -1,13 +1,19 @@
 #include <QtGui>
 #include <QDebug>
 #include "camera_widget.h"
+#include "config_manager.h"
 
-camera_widget::camera_widget(QWidget *parent, int max_width, int max_height, int min_width, int min_height)
+camera_widget::camera_widget(QWidget *parent)
     : QWidget(parent)
 {
     lb_frame = new QLabel(this);
-    this->lb_frame->setMinimumSize(640, 480);
-    this->setMinimumSize(640, 480);
+    layout = new QVBoxLayout(this);
+    layout->addWidget(lb_frame);
+    this->setLayout(layout);
+    this->lb_frame->setMinimumSize(config_manager::get_instance().get_face_width(), config_manager::get_instance().get_face_height());
+    this->lb_frame->setMaximumSize(config_manager::get_instance().get_face_width(), config_manager::get_instance().get_face_height());
+    this->setMinimumSize(config_manager::get_instance().get_camera_widget_width(), config_manager::get_instance().get_camera_widget_height());
+    this->setMaximumSize(config_manager::get_instance().get_camera_widget_width(), config_manager::get_instance().get_camera_widget_height());
 }
 
 camera_widget::~camera_widget(void)

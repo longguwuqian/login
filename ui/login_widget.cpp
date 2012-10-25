@@ -1,18 +1,18 @@
 #include <QtGui>
 #include "login_widget.h"
-//#include "config_manager.h"
+#include "config_manager.h"
 
 login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     QWidget(parent, f)
 {
     /*禁止改变大小*/
-    this->setMaximumSize(660, 600);
-    this->setMinimumSize(660, 600);
+    this->setMaximumSize(config_manager::get_instance().get_login_widget_width(), config_manager::get_instance().get_login_widget_height());
+    this->setMinimumSize(config_manager::get_instance().get_login_widget_width(), config_manager::get_instance().get_login_widget_height());
 
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
     vlayout_2 = new QVBoxLayout;
-    wgt_camera = new camera_widget(this, 660, 500, 660, 500);
+    wgt_camera = new camera_widget(this);
     wgt_down = new QWidget(this);
     btn_login = new QPushButton(tr("LOGIN"), wgt_down);
     btn_config = new QPushButton(tr("config"), wgt_down);

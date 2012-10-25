@@ -13,15 +13,16 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS += -O3 -pipe -ftracer -fivopts -ftree-loop-linear -ftree-vectorize -ffast-math -march=native -mfpmath=sse -mmmx -msse -msse2 -mssse3 -msse4
 
-unix{
-    CONFIG += link_pkgconfig
-    PKGCONFIG += opencv
-}
+
 
 #use qsingleapplication
 include("./qtsingleapplication/src/qtsingleapplication.pri")
 INCLUDEPATH += "./qtsingleapplication/src"
 
+unix{
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv
+}
 win32{
     INCLUDEPATH += "C:/opencv/opencv/build/include/opencv" \
                    "C:/opencv/opencv/build/include"

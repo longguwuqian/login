@@ -14,6 +14,7 @@ class capture_thread : public QThread
 
 public:
     capture_thread(int device_num);
+    ~capture_thread();
     void connect_camera(int device_num);
     void disconnect_camera();
     void stop_capture_thread();
@@ -27,6 +28,7 @@ public:
 private:
     QImage *img_border;
     QImage img_frame;
+    QImage orig_img_frame;
     QPainter *_img_painter;
     CvCapture *capture;
     QMutex stopped_mutex;

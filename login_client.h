@@ -27,7 +27,9 @@ public:
 signals:
     
 public slots:
-    bool login();
+    void login();
+    bool get_login_status();
+
 };
 
 #endif // LOGIN_CLIENT_H
