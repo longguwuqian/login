@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTemporaryFile>
 #include <QPushButton>
+#include <QString>
 #include "ui/login_widget.h"
 #include "config_manager.h"
 #include "camera_controller.h"
@@ -18,6 +19,7 @@ private:
     tcp_sender *tcp_sdr;
     QTemporaryFile *img_tmp_file;
     QProcess *proc_browser;
+    QString username;
 
     void send_img();
 public:
@@ -28,7 +30,7 @@ signals:
     
 public slots:
     void login();
-    bool get_login_status();
+    void login_process();
 
 };
 

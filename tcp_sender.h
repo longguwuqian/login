@@ -14,7 +14,9 @@ class tcp_sender : public QObject
     Q_OBJECT
 public:
     tcp_sender();
-    void send(QTemporaryFile *file);
+    void set_img_file(QTemporaryFile *file);
+    void send_username(QString &uname);
+    void send_img();
 
 private:
     QTcpSocket *client_socket;
@@ -25,13 +27,16 @@ private:
     qint64 load_size;
     QByteArray out_block;
     QString file_path;
+
+    QString username;
+    void confirm_username(QString &uname);
 signals:
-    void get_url_done();
+    void receive_status_done();
 private slots:
     void start_transfer();//
     void display_error(QAbstractSocket::SocketError socket_error);
     void update_client_progress(qint64 num_bytes);
-    void get_url();
+    void receive_status();
 
 
     void connected_to_host();

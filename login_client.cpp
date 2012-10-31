@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDesktopServices>
+#include <QMessageBox>
+#include <QLineEdit>
 #include "login_client.h"
 
 login_client::login_client(QObject *parent) :
@@ -13,7 +15,7 @@ login_client::login_client(QObject *parent) :
 
     connect(this->camera_ctl->cpt_thread, SIGNAL(new_frame(QImage *, QMutex *, QWaitCondition *, volatile bool *)), this->wgt_login->wgt_camera, SLOT(update_frame(QImage *, QMutex *, QWaitCondition *, volatile bool *)));
     connect(this->wgt_login->btn_login, SIGNAL(clicked()), this, SLOT(login()));
-    connect(this->tcp_sdr, SIGNAL(get_url_done()), this, SLOT(get_login_status()));
+    connect(this->tcp_sdr, SIGNAL(receive_status_done()), this, SLOT(login_process()));
 }
 
 login_client::~login_client()
@@ -42,25 +44,39 @@ void login_client::send_img()
     if (this->img_tmp_file->open()) {
         this->camera_ctl->cpt_thread->get_frame().save(this->img_tmp_file->fileName(), "png");
     }
-    this->tcp_sdr->send(this->img_tmp_file);
+    this->tcp_sdr->set_img_file(this->img_tmp_file);
+    this->tcp_sdr->send_img();
     this->camera_ctl->start_capture_thread();
 }
 
 void login_client::login()
 {
-    this->send_img();
-}
-bool login_client::get_login_status()
-{
-    bool status = true;
-    if (config_manager::get_instance().get_login_url().isNull()) return false;
-    if (config_manager::get_instance().is_use_default_browser()) {
-        status = QDesktopServices::openUrl(QUrl(config_manager::get_instance().get_login_url()));
-    } else {
-        QStringList arg_list;
-        arg_list.append(config_manager::get_instance().get_login_url());
-        this->proc_browser = new QProcess;
-        this->proc_browser->start(config_manager::get_instance().get_browser_path(), arg_list, QIODevice::ReadWrite);
+    if (this->wgt_login->le_username->text().length() == 0) QMessageBox::warning(this->wgt_login, tr("warning"), tr("user name is empty!"), QMessageBox::Ok);
+    else {
+        this->username = this->wgt_login->le_username->text();
+        this->tcp_sdr->send_username(this->username);
+        this->send_img();
     }
-    return status;
+}
+//bool login_client::get_login_status()
+//{
+//    bool status = true;
+//    if (config_manager::get_instance().get_login_url().isNull()) return false;
+//    if (config_manager::get_instance().is_use_default_browser()) {
+//        status = QDesktopServices::openUrl(QUrl(config_manager::get_instance().get_login_url()));
+//    } else {
+//        QStringList arg_list;
+//        arg_list.append(config_manager::get_instance().get_login_url());
+//        this->proc_browser = new QProcess;
+//        this->proc_browser->start(config_manager::get_instance().get_browser_path(), arg_list, QIODevice::ReadWrite);
+//    }
+//    return status;
+//}
+void login_client::login_process()
+{
+    if (config_manager::get_instance().is_loggedin == false) {
+        QMessageBox::warning(this->wgt_login, tr("warning"), tr("you are not logged in"), QMessageBox::Ok);
+    } else {
+        QMessageBox::information(this->wgt_login, tr("welcome"), "username:"+this->username+"s_code:"+config_manager::get_instance().s_code, QMessageBox::Ok);
+    }
 }
