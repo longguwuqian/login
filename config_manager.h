@@ -22,12 +22,14 @@ public:
     int get_face_height() const;
     int get_face_width() const;
     QString get_border_file_path() const;
+    void set_login_url(QString &url);
+    void set_login_url(const char *url);
+    QString get_login_url() const;
 
     bool is_loggedin;
     QString s_code;
 private:
     config_manager();
-
 
     int login_widget_width;
     int login_widget_height;
@@ -38,6 +40,7 @@ private:
 
     QString browser_path;
     QString border_file_path;
+    QString login_url;
     bool __use_default_browser;
 };
 

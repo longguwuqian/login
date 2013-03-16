@@ -11,6 +11,7 @@ config_manager::config_manager()
     face_height = 480;
     face_width = 640;
     border_file_path = "border.png";
+    login_url = "http://";
 }
 config_manager::~config_manager()
 {
@@ -36,6 +37,22 @@ void config_manager::set_browser_path(const QString &path)
         this->browser_path = path;
         this->__use_default_browser = false;
     }
+}
+
+void config_manager::set_login_url(QString &url)
+{
+    this->login_url = url;
+}
+
+void config_manager::set_login_url(const char *url)
+{
+    this->login_url.clear();
+    this->login_url.append(url);
+}
+
+QString config_manager::get_login_url() const
+{
+    return this->login_url;
 }
 
 QString config_manager::get_browser_path()

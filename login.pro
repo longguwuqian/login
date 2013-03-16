@@ -24,46 +24,64 @@ unix{
     PKGCONFIG += opencv
 }
 win32{
-    INCLUDEPATH += "C:/opencv/opencv/build/include/opencv" \
-                   "C:/opencv/opencv/build/include"
+    INCLUDEPATH += "C:/opencv/build/include/opencv" \
+                   "C:/opencv/build/include" \
+                   "C:/opencv/build/include/opencv2"
 
-    LIBS += "C:/opencv/lib/libopencv_core241.dll.a" \
-            "C:/opencv/lib/libopencv_features2d241.dll.a" \
-            "C:/opencv/lib/libopencv_highgui241.dll.a" \
-            "C:/opencv/lib/libopencv_video241.dll.a" \
-            "C:/opencv/lib/libopencv_imgproc241.dll.a"
+    LIBS += "C:/opencv/build/x86/mingw/lib/libopencv_core244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_features2d244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_highgui244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_video244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_imgproc244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_contrib244.dll.a" \
+            "C:/opencv/build/x86/mingw/lib/libopencv_objdetect244.dll.a"
 }
 
 SOURCES += main.cpp\
     config_manager.cpp \
-    capture_thread.cpp \
-    camera_controller.cpp \
+    http_sender.cpp \
+    face_recognizer/my_eigen_face_recognizer.cpp \
+    face_recognizer/face_recognizer.cpp \
+    face_detector/MatrixOper.cpp \
+    face_detector/face_detector.cpp \
+    face_detector/AffineTrans.cpp
 
 HEADERS  += \
     config_manager.h \
-    capture_thread.h \
-    camera_controller.h \
+    http_sender.h \
+    face_recognizer/my_eigen_face_recognizer.h \
+    face_recognizer/face_recognizer.h \
+    face_detector/MemoryOper.h \
+    face_detector/MatrixOper.h \
+    face_detector/face_detector.h \
+    face_detector/BasicDataType.h \
+    face_detector/AffineTrans.h
 
 TRANSLATIONS += ./translations/i18n_zh_CN.ts
 
-HEADERS += \
-    tcp_sender.h
+HEADERS +=
 
-SOURCES += \
-    tcp_sender.cpp
+SOURCES +=
 
 HEADERS += \
     ui/login_widget.h \
     ui/config_dialog.h \
-    ui/camera_widget.h
 
 SOURCES += \
     ui/login_widget.cpp \
     ui/config_dialog.cpp \
-    ui/camera_widget.cpp
 
 HEADERS += \
     login_client.h
 
 SOURCES += \
     login_client.cpp
+
+HEADERS += \
+    ui/camera/capture_thread.h \
+    ui/camera/camera_widget.h \
+
+SOURCES += \
+    ui/camera/capture_thread.cpp \
+    ui/camera/camera_widget.cpp \
+

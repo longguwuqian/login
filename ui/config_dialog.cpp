@@ -1,4 +1,12 @@
-#include <QtGui>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QLineEdit>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QCloseEvent>
 #include "config_dialog.h"
 
 config_dialog::config_dialog(QWidget *parent) :

@@ -13,9 +13,9 @@ class QDialog;
 class QString;
 class QProcess;
 
-#include <cv.h>
-#include <highgui.h>
-#include "camera_widget.h"
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+#include "camera/camera_widget.h"
 #include "config_dialog.h"
 
 class login_widget : public QWidget
@@ -26,12 +26,6 @@ public:
     ~login_widget();
 
     camera_widget *wgt_camera;
-
-//private:
-//public:
-    /////
-//    QPushButton *tmp_btn_save_img;
-    /////
 
     QHBoxLayout *hlayout;
     QVBoxLayout *vlayout;

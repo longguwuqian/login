@@ -1,4 +1,6 @@
-#include <QtGui>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QCheckBox>
 #include "login_widget.h"
 #include "config_manager.h"
 
@@ -9,10 +11,16 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
     this->setMaximumSize(config_manager::get_instance().get_login_widget_width(), config_manager::get_instance().get_login_widget_height());
     this->setMinimumSize(config_manager::get_instance().get_login_widget_width(), config_manager::get_instance().get_login_widget_height());
 
+    wgt_camera = new camera_widget(this, 0, config_manager::get_instance().get_border_file_path());
+    wgt_camera->lb_frame->setMinimumSize(config_manager::get_instance().get_face_width(), config_manager::get_instance().get_face_height());
+    wgt_camera->lb_frame->setMaximumSize(config_manager::get_instance().get_face_width(), config_manager::get_instance().get_face_height());
+    wgt_camera->setMinimumSize(config_manager::get_instance().get_camera_widget_width(), config_manager::get_instance().get_camera_widget_height());
+    wgt_camera->setMaximumSize(config_manager::get_instance().get_camera_widget_width(), config_manager::get_instance().get_camera_widget_height());
+
+
     hlayout = new QHBoxLayout;
     vlayout = new QVBoxLayout;
     vlayout_2 = new QVBoxLayout;
-    wgt_camera = new camera_widget(this);
     wgt_down = new QWidget(this);
     btn_login = new QPushButton(tr("LOGIN"), wgt_down);
     btn_config = new QPushButton(tr("config"), wgt_down);
@@ -65,6 +73,7 @@ login_widget::login_widget(QWidget *parent, Qt::WindowFlags f) :
 
 login_widget::~login_widget()
 {
+    delete wgt_camera;
 }
 
 void login_widget::call_config_dialog()
